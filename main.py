@@ -35,6 +35,10 @@ async def on_message(message): #message é do tipo `Message`
             await Message.reply(message, content=f'@{message.author} ERRO! lembrete # {message.content} # não salvo.')
 
 
+"""
+Bot's Functionalities
+"""
+
 @bot.command()
 async def show(ctx): #ctx é do tipo `context`
     if len(show_table()) == 0:
@@ -74,5 +78,6 @@ async def del_one(ctx, arg:str):
             await ctx.reply(content=f'@{ctx.author} não há lembretes salvos para serem apagados!')  
     except MissingRequiredArgument as e:
         print(e)
+
 
 bot.run()
