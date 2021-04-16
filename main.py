@@ -29,6 +29,7 @@ async def on_message(message): #message é do tipo `Message`
         return
     else:
         data = message.content + '\n'
+        # using .lower() to make a pattern on the data stored in the database
         if insert_table(data.lower()) == True:
             await Message.reply(message, content=f'@{message.author} nota salva com sucesso!')
         else:
@@ -39,7 +40,6 @@ async def on_message(message): #message é do tipo `Message`
 Bot's Functionalities
 """
 
-# use regex to send the messages with the first letter in upper case
 @bot.command()
 async def show(ctx): #ctx é do tipo `context`
     if len(show_table()) == 0:
@@ -47,7 +47,7 @@ async def show(ctx): #ctx é do tipo `context`
     else:
         tmp = []
         for a in show_table():
-            tmp.extend([a[0]])
+            tmp.extend([a[0].capitalize()]) # using .capitalize() to show to the user his notes with first letter upper case
         await ctx.send(''.join(tmp))
         tmp.clear()
 
@@ -66,15 +66,15 @@ async def del_one(ctx, arg:str):
     try:
         if arg != None:
             count = show_table()
+            # using .lower() to turn the arg in lower case, to match the data in the table
             reminder = arg.lower()
             for i in count:
                 if reminder in i[0]:
                     msg = i[0]
-                    # outputs with the first letter in upper case
                     if delete_row(msg) == True:
-                        await ctx.reply(content=f'@{ctx.author} nota {msg} apagada com sucesso!')
+                        await ctx.reply(content=f'@{ctx.author} nota {msg.capitalize()} apagada com sucesso!')
                     else:
-                        await ctx.reply(content=f'@{ctx.author} ERRO! Nota {msg} não apagada!')
+                        await ctx.reply(content=f'@{ctx.author} ERRO! Nota {msg.capitalize()} não apagada!')
         elif len(show_table()) == 0:
             await ctx.reply(content=f'@{ctx.author} não há notas salvas para serem apagadas!')  
     except MissingRequiredArgument as e:
