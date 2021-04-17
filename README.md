@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/italopinto/telegram_bot_notas/master/image/icon.png" alt="Notas" title="bot logo" height="200" width="200"/>
+<img src="https://github.com/italopinto/telegram_bot_notas/blob/main/image/notas.png" alt="Notas" title="bot logo" height="200" width="200"/>
 </p>
 
 # Bot do Telegram para salvar Notas
